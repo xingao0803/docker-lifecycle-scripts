@@ -3,15 +3,15 @@
 node {
 
    // Get some code from a GitHub repository
-   git url: 'https://github.com/jfrogtraining/docker-lifecycle-scripts'
-  def artServer = Artifactory.server('jfrogtraining')
+  git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
+  def artServer = Artifactory.server('artiha-demo')
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
     def uname=env.USERNAME
     def pw=env.PASSWORD
     artServer.username=uname
     artServer.password=pw
-    def curlstr="curl -u"+uname+':'+pw+" 'https://jfrogtraining.jfrog.io/jfrogtraining/"
+    def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
     def artDocker= Artifactory.docker(uname, pw)
     def buildInfo = Artifactory.newBuildInfo()
     dir('docker-framework') {
@@ -51,31 +51,31 @@ node {
       stage('docker build') {
         buildInfo.env.collect()
         println('starting build '+env.BUILD_NUMBER)
-        def tagName='jfrogtraining-docker-dev.jfrog.io/docker-framework:'+env.BUILD_NUMBER
+        def tagName='beijing.artifactory.com:5002/docker-framework:'+env.BUILD_NUMBER
         sh 'pwd'
         sh 'ls -al'
         sh 'cat Dockerfile'
         docker.build(tagName)
-        artDocker.push(tagName, 'docker-dev-local', buildInfo)
+        artDocker.push(tagName, 'docker-dev-local2', buildInfo)
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
         sh 'sed -E "s/@/$BUILD_NUMBER/" retag.json > retag_out.json'
         sh 'cat retag_out.json'
-        def retagstr=curlstr+"api/docker/docker-prod-local/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
+        def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
       }
     }
   }
 }
 node {
-  git url: 'https://github.com/jfrogtraining/docker-lifecycle-scripts'
-  def artServer = Artifactory.server('jfrogtraining')
+  git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
+  def artServer = Artifactory.server('artiha-demo')
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
     def uname=env.USERNAME
     def pw=env.PASSWORD
     artServer.username=uname
     artServer.password=pw
-    def curlstr="curl -u"+uname+':'+pw+" 'https://jfrogtraining.jfrog.io/jfrogtraining/"
+    def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
     def artDocker= Artifactory.docker(uname, pw)
     dir('docker-framework/framework-test')
     {
@@ -95,7 +95,7 @@ node {
 }""" //"//DownloadSpec
         println(downloadSpecWar)
         artServer.download(downloadSpecWar)
-        def tagNameTest='gcartifactory-us.jfrog.info:5002/docker-framework-test:'+env.BUILD_NUMBER
+        def tagNameTest='beijing.artifactory.com:5002/docker-framework-test:'+env.BUILD_NUMBER
         docker.build(tagNameTest)
         docker.image(tagNameTest).withRun('-p 8181:8181') {c ->
           sleep 5
@@ -107,11 +107,11 @@ node {
           // Mandatory parameters
           'buildName'          : env.JOB_NAME,
           'buildNumber'        : env.BUILD_NUMBER,
-          'targetRepo'         : 'docker-prod-local',
+          'targetRepo'         : 'docker-release-local2',
 
           // Optional parameters
           'comment'            : 'Framework works with latest version of application to pass test',
-          'sourceRepo'         : 'docker-dev-local',
+          'sourceRepo'         : 'docker-dev-local2',
           'status'             : 'Released',
           'includeDependencies': false,
           'copy'               : true
@@ -121,7 +121,7 @@ node {
         artServer.promote promotionConfig
         sh 'sed -E "s/@/$BUILD_NUMBER/" retag.json > retag_out.json'
         sh 'cat retag_out.json'
-        def retagstr=curlstr+"api/docker/docker-prod-local/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
+        def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
         sh retagstr
       }
     }
