@@ -57,7 +57,7 @@ node {
         sh 'cat Dockerfile'
         docker.build(tagName)
         artDocker.push(tagName, 'docker-dev-local2', buildInfo)
-        
+        artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
         sh 'sed -E "s/@/$BUILD_NUMBER/" retag.json > retag_out.json'
         sh 'cat retag_out.json'
@@ -76,7 +76,11 @@ node {
     artServer.username=uname
     artServer.password=pw
     def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
-    def artDocker= Artifactory.docker(uname, pw)
+    def 
+       
+       
+       
+       = Artifactory.docker(uname, pw)
     dir('docker-framework/framework-test')
     {
       stage('testing') {
