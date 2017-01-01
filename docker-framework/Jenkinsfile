@@ -3,7 +3,7 @@
 node {
 
    // Get some code from a GitHub repository
-  git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
+  git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts.git'
   def artServer = Artifactory.server('artiha-demo')
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
