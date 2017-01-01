@@ -76,11 +76,7 @@ node {
     artServer.username=uname
     artServer.password=pw
     def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
-    def 
-       
-       
-       
-       = Artifactory.docker(uname, pw)
+    def artDocker= Artifactory.docker(uname, pw)
     dir('docker-framework/framework-test')
     {
       stage('testing') {
