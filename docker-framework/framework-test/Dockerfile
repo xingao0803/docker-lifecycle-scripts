@@ -1,4 +1,4 @@
-FROM jfrogtraining-docker-dev.jfrog.io/docker-framework:latest
+FROM beijing.artifactory.com:5002/docker-framework:latest
 
 MAINTAINER Mark Galpin markg@jfrog.com
 
