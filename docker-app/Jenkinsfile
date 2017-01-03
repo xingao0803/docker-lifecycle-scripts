@@ -2,7 +2,7 @@ node {
    //def artServer = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
   def artServer = Artifactory.server('artiha-demo')
    artServer.credentialsId='art-docker-ci'
-
+  def buildInfo = Artifactory.newBuildInfo()
 
    // Mark the code checkout 'stage'....
    stage('Checkout Docker') {
@@ -11,7 +11,7 @@ node {
    }
    //def artServer = Artifactory.server('jfrogtraining')
    //def buildInfo = Artifactory.newBuildInfo()
-  
+  buildInfo.env.capture = true
 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 def uname=env.USERNAME
