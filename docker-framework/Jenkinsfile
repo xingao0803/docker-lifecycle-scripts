@@ -125,7 +125,7 @@ node {
 
         // Promote build
         artServer.promote promotionConfig
-         dir('docker-framework') {
+         dir('../docker-framework') {
             sh 'sed -E "s/@/$BUILD_NUMBER/" retag-release.json > retag_out_release.json'
             sh 'cat retag_out_release.json'
             def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out_release.json"
