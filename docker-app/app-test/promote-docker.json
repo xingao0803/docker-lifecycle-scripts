@@ -3,8 +3,8 @@
     "comment" : "App Image has passed test.",
     "ciUser": "jfrog",
     "dryRun" : false,
-    "targetRepo" : "docker-prod-local",
-    "sourceRepo" : "docker-dev-local",
+    "targetRepo" : "docker-release-local2",
+    "sourceRepo" : "docker-dev-local2",
     "includeDependencies" : false,
     "copy" : false,
     "failFast": false
