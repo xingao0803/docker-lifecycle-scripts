@@ -67,7 +67,8 @@ node {
         sh 'sed -E "s/@/$BUILD_NUMBER/" retag-dev > retag_out.json'
         sh 'cat retag_out.json'
         def retagstr=curlstr+"api/docker/docker-dev-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
-         sh retagstr
+        sh cat retagstr
+        sh cat retagstr
       }
     }
   }
