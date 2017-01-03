@@ -56,6 +56,7 @@ node {
         sh 'ls -al'
         sh 'cat Dockerfile'
         docker.build(tagName)
+        sh 'docker push ' + tagName
        // artDocker.push(tagName, 'docker-dev-local2', buildInfo)
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
