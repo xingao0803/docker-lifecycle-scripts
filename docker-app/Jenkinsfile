@@ -2,31 +2,16 @@ node {
    //def artServer = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
   def artServer = Artifactory.server('artiha-demo')
    artServer.credentialsId='art-docker-ci'
-   def buildInfo = Artifactory.newBuildInfo()
-   stage 'Checkout Gradle'
-        git url: 'https://github.com/jfrogtraining/project-examples.git'
-dir('gradle-examples/4/gradle-example-ci-server') {
- //sh './increment.sh'
 }
-
-    stage 'Build Gradle'
-        //def server = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
-        def artifactoryGradle = Artifactory.newGradleBuild()
-        artifactoryGradle.tool = 'gradle' // Tool name from Jenkins configuration
-        artifactoryGradle.deployer repo:'libs-snapshot-local', server: artServer
-        artifactoryGradle.resolver repo:'libs-snapshot', server: artServer
-        artifactoryGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean artifactoryPublish', buildInfo: buildInfo
-
 
    // Mark the code checkout 'stage'....
    stage('Checkout Docker') {
-
    // Get some code from a GitHub repository
    git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
    }
    //def artServer = Artifactory.server('jfrogtraining')
    //def buildInfo = Artifactory.newBuildInfo()
-   buildInfo.env.capture = true
+  
 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 def uname=env.USERNAME
@@ -37,13 +22,13 @@ artServer.password=pw
  def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
 dir('docker-app') {
    stage('Resolve') {
-       def warverstr=curlstr+ "api/search/latestVersion?g=org.jfrog.example.gradle&a=webservice&repos=libs-snapshot'"
+       def warverstr=curlstr+ "api/search/latestVersion?g=org.jfrog.example.gradle&a=webservice&repos=demo-mvn-local'"
        sh warverstr +' > war/version.txt'
        env.WARVER=readFile('war/version.txt')
         def downloadSpec = """{
  "files": [
   {
-   "pattern": "libs-snapshot/org/jfrog/example/gradle/webservice/"""+env.WARVER+"""/*.war",
+   "pattern": "demo-mvn-local/org/jfrog/example/gradle/webservice/"""+env.WARVER+"""/*.war",
    "target": "war/webservice.war",
    "flat":"true"
   }
