@@ -58,7 +58,9 @@ node {
         docker.build(tagName)
        // artDocker.push(tagName, 'docker-dev-local2', buildInfo)
         sh 'docker push ' + tagName
-         buildInfo.modules.push {'id':'docker-framework:'+env.BUILD_NUMBER}
+         def json = new JsonBuilder()
+         json.id = 'docker-framework:'+env.BUILD_NUMBER
+         buildInfo.modules[1] = json
         //sh 'docker push beijing.artifactory.com:5001/docker-framework:'+env.BUILD_NUMBER
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
