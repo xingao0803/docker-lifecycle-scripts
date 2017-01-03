@@ -4,7 +4,7 @@
     "ciUser": "jfrog",
     "dryRun" : false,
     "targetRepo" : "libs-release-local",
-    "sourceRepo" : "libs-dev-local",
+    "sourceRepo" : "libs-snapshot-local",
     "includeDependencies" : false,
     "copy" : false,
     "failFast": false
