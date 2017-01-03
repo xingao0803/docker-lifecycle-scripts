@@ -1,6 +1,6 @@
-FROM jfrogtraining-docker-prod.jfrog.io/docker-framework:latest
+FROM beijing.artifactory.com:5001/docker-framework:latest
 
-MAINTAINER Mark Galpin markg@jfrog.com
+MAINTAINER Liu yongqiang@jfrog.com
 
 ADD war/*.war /home/exec/tomcat/webapps/swampup.war
 
