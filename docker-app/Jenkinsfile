@@ -1,13 +1,14 @@
 node {
    //def artServer = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
   def artServer = Artifactory.server('artiha-demo')
-   artServer.credentialsId='art-docker-ci'
-  def rtMaven = Artifactory.newMavenBuild()
+  artServer.credentialsId='art-docker-ci'
+  def buildInfo = Artifactory.newBuildInfo()
   stage 'Checkout MAVEN'
   git url: 'https://github.com/lyqwaterway/project-examples.git'
   
   stage 'Build Maven'
-  def buildInfo = Artifactory.newBuildInfo()
+  def rtMaven = Artifactory.newMavenBuild()
+  
   rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
   rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
   rtMaven.tool = 'maven'
