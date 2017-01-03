@@ -71,8 +71,8 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory
             def imageName='beijing.artifactory.com:5002/docker-app'+':'+env.BUILD_NUMBER
             sh 'docker images | grep docker-app'
             println(imageName)
-            sh 'docker rmi '+imageName+' || true'
-            artDocker.pull(imageName)
+            //sh 'docker rmi '+imageName+' || true'
+            //artDocker.pull(imageName)
             //docker.withRegistry('https://jfrogtraining-docker-dev.jfrog.io/', 'art-docker-ci') {
                 docker.image(imageName).withRun('-p 8181:8181') {c ->
                     sleep 5
