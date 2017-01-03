@@ -58,9 +58,9 @@ node {
         docker.build(tagName)
        // artDocker.push(tagName, 'docker-dev-local2', buildInfo)
         sh 'docker push ' + tagName
-         def model = {id 'docker-framework:'+env.BUILD_NUMBER}
-        
-         buildInfo.modules.add model
+         def tagName2='beijing.artifactory.com:5001/docker-framework:'+env.BUILD_NUMBER
+        sh 'docker tag ' + tagName + ' ' + tagName2
+        sh 'docker push ' + tagName2
         //sh 'docker push beijing.artifactory.com:5001/docker-framework:'+env.BUILD_NUMBER
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
