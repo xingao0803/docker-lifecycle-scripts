@@ -60,7 +60,7 @@ node {
         sh 'docker push ' + tagName
          def model = {id 'docker-framework:'+env.BUILD_NUMBER}
         
-         buildInfo.addModules model
+         buildInfo.modules.add model
         //sh 'docker push beijing.artifactory.com:5001/docker-framework:'+env.BUILD_NUMBER
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
