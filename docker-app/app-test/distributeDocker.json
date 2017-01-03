@@ -3,6 +3,6 @@
     "overrideExistingFiles" : "true",
     "async" : "false",
     "targetRepos" : "jenkins-pipeline-demo",
-    "sourceRepos" : ["docker-prod-local"],
+    "sourceRepos" : ["docker-release-local2"],
     "dryRun" : "false"
 }
