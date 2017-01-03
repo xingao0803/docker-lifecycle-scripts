@@ -64,10 +64,9 @@ node {
         //sh 'docker push beijing.artifactory.com:5001/docker-framework:'+env.BUILD_NUMBER
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
-        sh 'sed -E "s/@/$BUILD_NUMBER/" retag-dev > retag_out.json'
-        sh 'cat retag_out.json'
-        def retagstr=curlstr+"api/docker/docker-dev-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
-        echo retagstr
+        sh 'sed -E "s/@/$BUILD_NUMBER/" retag-dev > retag_out_dev.json'
+        sh 'cat retag_out_dev.json'
+        def retagstr=curlstr+"api/docker/docker-dev-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out_dev.json"
         sh retagstr
       }
     }
@@ -126,9 +125,9 @@ node {
 
         // Promote build
         artServer.promote promotionConfig
-        sh 'sed -E "s/@/$BUILD_NUMBER/" retag-release > retag_out.json'
-        sh 'cat retag_out.json'
-        def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out.json"
+        sh 'sed -E "s/@/$BUILD_NUMBER/" retag-release > retag_out_release.json'
+        sh 'cat retag_out_release.json'
+        def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out_release.json"
         sh retagstr
       }
     }
