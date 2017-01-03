@@ -1,6 +1,7 @@
 {
-    "sourceRepo" : "docker-release-local2",
-    "dockerImage" : "docker-framework",
+    "targetRepo" : "docker-release-local2",
+    "dockerRepository" : "docker-framework",
     "sourceTag" : "@",
-    "destTag" : "latest"
+    "destTag" : "latest",
+    "copy" : true
 }
