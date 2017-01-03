@@ -3,5 +3,5 @@
     "dockerRepository" : "docker-framework",
     "sourceTag" : "@",
     "destTag" : "latest",
-    "copy" : false
+    "copy" : true
 }
