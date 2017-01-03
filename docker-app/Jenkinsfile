@@ -2,7 +2,7 @@ node {
    //def artServer = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
   def artServer = Artifactory.server('artiha-demo')
    artServer.credentialsId='art-docker-ci'
-}
+
 
    // Mark the code checkout 'stage'....
    stage('Checkout Docker') {
