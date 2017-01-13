@@ -92,7 +92,7 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory
         stage('Staging') {
             def promotionConfig1 = [
                 // Mandatory parameters
-                'buildName'          : $BUILD_NAME,
+                'buildName'          : $JOB_NAME,
                 'buildNumber'        : $BUILD_NUMBER,
                 'targetRepo'         : 'libs-stage-local',
         
@@ -108,7 +108,7 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory
             ]
             def promotionConfig2 = [
                 // Mandatory parameters
-                'buildName'          : $BUILD_NAME,
+                'buildName'          : $JOB_NAME,
                 'buildNumber'        : $BUILD_NUMBER,
                 'targetRepo'         : 'libs-stage-local',
         
