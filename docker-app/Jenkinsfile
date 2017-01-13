@@ -4,7 +4,7 @@ node {
   artServer.credentialsId='art-docker-ci'
   def buildInfo = Artifactory.newBuildInfo()
   stage 'Checkout MAVEN'
-  git url: 'https://github.com/lyqwaterway/project-examples.git'
+  git url: 'https://gitlab.com/yongqiang/project-examples.git'
   
   stage 'Build Maven'
   def rtMaven = Artifactory.newMavenBuild()
@@ -65,7 +65,7 @@ dir('docker-app') {
 }
 }
 node {
-    git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
+    git url: 'https://gitlab.com/yongqiang/docker-lifecycle-scripts.git'
     def artServer = Artifactory.server('artiha-demo')
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
