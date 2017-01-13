@@ -16,7 +16,7 @@ node {
    // Mark the code checkout 'stage'....
    stage('Checkout Docker') {
    // Get some code from a GitHub repository
-   git url: 'https://github.com/lyqwaterway/docker-lifecycle-scripts'
+   git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git'
    }
    //def artServer = Artifactory.server('jfrogtraining')
    //def buildInfo = Artifactory.newBuildInfo()
@@ -88,6 +88,45 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory
                     sh 'curl "http://localhost:8181/swampup/"'
                 }
             //}
+        }
+        stage('Staging') {
+            def promotionConfig1 = [
+                // Mandatory parameters
+                'buildName'          : $BUILD_NAME,
+                'buildNumber'        : $BUILD_NUMBER,
+                'targetRepo'         : 'libs-stage-local',
+        
+                // Optional parameters
+                'comment'            : 'custom stage 1',
+                'sourceRepo'         : 'libs-snapshot-local',
+                'status'             : 'custom-stage1',
+                'includeDependencies': false,
+                'copy'               : true,
+                // 'failFast' is true by default.
+                // Set it to false, if you don't want the promotion to abort upon receiving the first error.
+                'failFast'           : true
+            ]
+            def promotionConfig2 = [
+                // Mandatory parameters
+                'buildName'          : $BUILD_NAME,
+                'buildNumber'        : $BUILD_NUMBER,
+                'targetRepo'         : 'libs-stage-local',
+        
+                // Optional parameters
+                'comment'            : 'custom stage 1',
+                'sourceRepo'         : 'libs-snapshot-local',
+                'status'             : 'custom-stage1',
+                'includeDependencies': false,
+                'copy'               : true,
+                // 'failFast' is true by default.
+                // Set it to false, if you don't want the promotion to abort upon receiving the first error.
+                'failFast'           : true
+            ]
+
+            // Promote build
+            artServer.promote promotionConfig1
+            artServer.promote promotionConfig2
+           
         }
         stage('Promotions') {
             def promotestr=curlstr+"api/build/promote/$JOB_NAME/$BUILD_NUMBER' -X POST -H 'Content-Type: application/vnd.org.jfrog.artifactory.build.PromotionRequest+json' "
