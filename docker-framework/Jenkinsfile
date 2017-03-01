@@ -54,11 +54,11 @@ node {
         sh 'ls -al'
         sh 'cat Dockerfile'
         docker.build(tagName)
-       // artDocker.push(tagName, 'docker-dev-local2', buildInfo)
-        sh 'docker push ' + tagName
-         def tagName2='47.93.114.82:5001/docker-framework:'+env.BUILD_NUMBER
-        sh 'docker tag ' + tagName + ' ' + tagName2
-        sh 'docker push ' + tagName2
+        artDocker.push(tagName, 'docker-dev-local2', buildInfo)
+        //sh 'docker push ' + tagName
+         //def tagName2='47.93.114.82:5001/docker-framework:'+env.BUILD_NUMBER
+        //sh 'docker tag ' + tagName + ' ' + tagName2
+        //sh 'docker push ' + tagName2
         //sh 'docker push 47.93.114.82:5001/docker-framework:'+env.BUILD_NUMBER
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
