@@ -1,6 +1,6 @@
-FROM ubuntu:12.04
+FROM ubuntu:latest
 
-MAINTAINER Mark Galpin liuyq@jfrog.com
+MAINTAINER yongqiang liuyq@jfrog.com
 
 RUN /bin/bash -c cd ~; cd /home ; mkdir -p exec
 ADD jdk/jdk-8-linux-x64.tar.gz /home/exec
