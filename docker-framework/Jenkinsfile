@@ -53,7 +53,7 @@ node {
         sh 'pwd'
         sh 'ls -al'
         sh 'cat Dockerfile'
-        docker.build(tagName)
+        //docker.build(tagName)
         artDocker.push(tagName, 'docker-dev-local2', buildInfo)
         //sh 'docker push ' + tagName
          //def tagName2='47.93.114.82:5001/docker-framework:'+env.BUILD_NUMBER
