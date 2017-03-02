@@ -49,7 +49,7 @@ node {
       stage('docker build') {
         buildInfo.env.collect()
         println('starting build '+env.BUILD_NUMBER)
-        def tagName='localhost:5002/docker-framework:'+env.BUILD_NUMBER
+        def tagName='47.93.114.82:5002/docker-framework:'+env.BUILD_NUMBER
         sh 'pwd'
         sh 'ls -al'
         sh 'cat Dockerfile'
@@ -99,7 +99,7 @@ node {
 }""" //"//DownloadSpec
         println(downloadSpecWar)
         artServer.download(downloadSpecWar)
-        def tagNameTest='localhost:5002/docker-framework-test:'+env.BUILD_NUMBER
+        def tagNameTest='47.93.114.82:5002/docker-framework-test:'+env.BUILD_NUMBER
         docker.build(tagNameTest)
         docker.image(tagNameTest).withRun('-p 8181:8181') {c ->
           sleep 5
