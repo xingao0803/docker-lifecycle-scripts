@@ -1,4 +1,4 @@
-FROM beijing.artifactory.com:5002/docker-framework:latest
+FROM 47.93.114.82:5002/docker-framework:latest
 
 MAINTAINER Mark Galpin markg@jfrog.com
 
