@@ -74,7 +74,7 @@ artServer.password=pw
 def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
     dir('docker-app/app-test') {
         stage('testing app') {
-            def imageName='docker-dev-local2.demo.artifactory.com/docker-app'+':'+env.BUILD_NUMBER
+            def imageName='docker-dev-local2.demo.jfrogchina.com/docker-app'+':'+env.BUILD_NUMBER
             sh 'docker images | grep docker-app'
             println(imageName)
             //sh 'docker rmi '+imageName+' || true'
