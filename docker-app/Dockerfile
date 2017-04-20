@@ -1,4 +1,4 @@
-FROM beijing.artifactory.com:5001/docker-framework:latest
+FROM docker-release-local2.demo.jfrogchina.com:5001/docker-framework:latest
 
 MAINTAINER Liu yongqiang@jfrog.com
 
