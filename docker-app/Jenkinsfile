@@ -28,7 +28,7 @@ def pw=env.PASSWORD
 artServer.username=uname
 artServer.password=pw
  sh 'echo credentials applied'
- def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
+ def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
 dir('docker-app') {
    stage('Resolve') {
        def warverstr=curlstr+ "api/search/latestVersion?g=org.jfrog.test&a=multi3&repos=libs-snapshot-local'"
@@ -71,7 +71,7 @@ def pw=env.PASSWORD
 artServer.username=uname
 artServer.password=pw
         def artDocker= Artifactory.docker(uname, pw)
-def curlstr="curl -u"+uname+':'+pw+" 'http://beijing.artifactory.com/artifactory/"
+def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
     dir('docker-app/app-test') {
         stage('testing app') {
             def imageName='docker-dev-local2.artifactory.com:/docker-app'+':'+env.BUILD_NUMBER
