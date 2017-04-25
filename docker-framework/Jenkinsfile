@@ -55,7 +55,7 @@ node {
         sh 'cat Dockerfile'
         docker.build(tagName)
         artDocker.push(tagName, 'docker-dev-local2', buildInfo)
-    
+        artDocker.deployer.addProperty("status", "in-qa").addProperty("compatibility", "1", "2", "3")
         artServer.publishBuildInfo(buildInfo)
         println('Retagging Image')
         sh 'sed -E "s/@/$BUILD_NUMBER/" retag-dev > retag_out_dev.json'
