@@ -1,4 +1,4 @@
-FROM 47.93.114.82:5002/docker-framework:latest
+FROM docker-dev-local2.demo.jfrogchina.com/docker-framework:latest
 
 MAINTAINER Mark Galpin markg@jfrog.com
 
