@@ -116,11 +116,11 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
             {
              
               println("deploy app")
-              def aqlSearch = curlstr+"api/search/aql -T aql.json";
+              def aqlSearch = curlstr+"api/search/aql' -T aql.json";
               println(aqlSearch)
               sh aqlSearch;
               
-              def tagList = curlstr+"api/docker/docker-release-local2/v2/docker-app/tags/list";
+              def tagList = curlstr+"api/docker/docker-release-local2/v2/docker-app/tags/list'";
               sh tagList;
               
               println("deploy docker-app image")
