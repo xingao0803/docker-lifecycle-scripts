@@ -16,7 +16,7 @@ node {
    // Mark the code checkout 'stage'....
    stage('Checkout Docker') {
    // Get some code from a GitHub repository
-   git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git' , branch: 'demo-h3c', credentialsId: 'lyqwaterway'
+   git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git' , branch: 'webinar', credentialsId: 'lyqwaterway'
    }
    //def artServer = Artifactory.server('jfrogtraining')
    //def buildInfo = Artifactory.newBuildInfo()
@@ -62,7 +62,7 @@ dir('docker-app') {
 }
 }
 node {
-    git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'demo-h3c', credentialsId: 'lyqwaterway'
+    git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'webinar', credentialsId: 'lyqwaterway'
     def artServer = Artifactory.server('artiha-demo')
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
