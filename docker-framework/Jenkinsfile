@@ -1,7 +1,7 @@
 node {
 
    // Get some code from a GitHub repository
-  git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'demo-h3c', credentialsId: 'lyqwaterway'
+  git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'webinar', credentialsId: 'lyqwaterway'
   def artServer = Artifactory.server('artiha-demo')
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
@@ -69,7 +69,7 @@ node {
   }
 }
 node {
-  git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'demo-h3c', credentialsId: 'lyqwaterway'
+  git url: 'git@gitlab.com:yongqiang/docker-lifecycle-scripts.git', branch: 'webinar', credentialsId: 'lyqwaterway'
   def artServer = Artifactory.server('artiha-demo')
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'art-docker-ci',
   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
