@@ -105,19 +105,28 @@ node {
         }
       }
       stage('promote') {
-        dir('..') {
-          // Promote build
-          def promotestr=curlstr+"api/build/promote/$JOB_NAME/$BUILD_NUMBER' -X POST -H 'Content-Type: application/vnd.org.jfrog.artifactory.build.PromotionRequest+json' "
-          def dockerstr=promotestr + "-T promote-docker.json"
-          sh 'cat promote-docker.json'
-          println(dockerstr)
-          sh dockerstr
+        def promotionConfig = [
+          // Mandatory parameters
+          'buildName'          : env.JOB_NAME,
+          'buildNumber'        : env.BUILD_NUMBER,
+          'targetRepo'         : 'docker-release-local2',
 
-          sh 'sed -E "s/@/$BUILD_NUMBER/" retag-release.json > retag_out_release.json'
-          sh 'cat retag_out_release.json'
-          def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out_release.json"
-          sh retagstr
-        }
+          // Optional parameters
+          'comment'            : 'Framework works with latest version of application to pass test',
+          'sourceRepo'         : 'docker-dev-local2',
+          'status'             : 'Released',
+          'includeDependencies': false,
+          'copy'               : true
+        ]
+
+        // Promote build
+        artServer.promote promotionConfig
+         dir('..') {
+            sh 'sed -E "s/@/$BUILD_NUMBER/" retag-release.json > retag_out_release.json'
+            sh 'cat retag_out_release.json'
+            def retagstr=curlstr+"api/docker/docker-release-local2/v2/promote' -X POST -H 'Content-Type: application/json' -T retag_out_release.json"
+            sh retagstr
+         }
         
         
       }
