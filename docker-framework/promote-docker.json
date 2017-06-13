@@ -1,0 +1,11 @@
+{
+    "status": "Released",
+    "comment" : "Framework Image has passed test.",
+    "ciUser": "jfrog",
+    "dryRun" : false,
+    "targetRepo" : "docker-release-local2",
+    "sourceRepo" : "docker-dev-local2",
+    "includeDependencies" : false,
+    "copy" : true,
+    "failFast": false
+}
