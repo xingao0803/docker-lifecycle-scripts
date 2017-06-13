@@ -89,7 +89,7 @@ node {
         def downloadSpecWar = """{
  "files": [
   {
-   "pattern": "libs-release-local/org/jfrog/example/gradle/webservice/""+env.WARVER+"""/*.war",
+   "pattern": "libs-release-local/org/jfrog/example/gradle/webservice/"""+env.WARVER+"""/*.war",
    "target": "war/webservice.war",
    "flat":"true"
   }
