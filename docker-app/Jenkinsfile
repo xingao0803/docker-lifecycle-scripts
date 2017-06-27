@@ -87,7 +87,7 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
                 }
             //}
         
-            def testWarResult = curlstr+"api/storage/libs-snapshot-local/org/jfrog/test/multi3/"+env.WARVER+"/multi3-"+env.WARVER+".war?properties=qa.testType=junit,qa.testType=selenium;qa.status=approved;' -X PUT"
+            def testWarResult = curlstr+"api/storage/libs-snapshot-local/org/jfrog/test/multi3/"+env.WARVER+"/multi3-"+env.WARVER+".war?properties=qa.testType=junit,selenium;qa.status=approved;' -X PUT"
             println("write testResult back:" + testWarResult);
             sh testWarResult;
 
