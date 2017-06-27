@@ -138,6 +138,10 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
               sh "ansible webservers -m command -a 'docker rm docker-app'"
               sh "ansible webservers -m command -a 'docker rmi docker-release-local2.demo.jfrogchina.com/docker-app:latest'"
               sh "ansible webservers -m command -a 'docker run -d --name docker-app -p 9999:8181 docker-release-local2.demo.jfrogchina.com/docker-app:latest'"
+
+              def deployResult = curlstr+"api/storage/docker-release-local2/docker-app/latest/manifest.json?properties=deploy.server=webservers;deploy.operator=system' -X PUT"
+              println("write deployResult back:" + deployResult);
+              sh deployResult;
             }
         }
     }
