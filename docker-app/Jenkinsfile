@@ -88,11 +88,11 @@ def curlstr="curl -u"+uname+':'+pw+" 'http://47.93.114.82/artifactory/"
             //}
         
             def testWarResult = curlstr+"api/storage/libs-release-local/org/jfrog/test/multi3/"+env.WARVER+"/multi3-"+env.WARVER+".war?properties=qa.test=approved;qa.approver=system' -X PUT"
-            sh "cat testWarResult";
+            println("write testResult back:" + testWarResult);
             sh testWarResult;
 
             def testDockerResult = curlstr+"api/storage/docker-dev-local2/docker-framework/"+env.BUILD_NUMBER+"/manifest.json?properties=qa.test=approved;qa.approver=system' -X PUT"
-            sh "cat testDockerResult";
+            println("write testResult back:" + testDockerResult);
             sh testDockerResult;
 
         }
