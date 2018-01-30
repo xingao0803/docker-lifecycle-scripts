@@ -116,7 +116,6 @@ node {
           'sourceRepo'         : 'docker-dev-local2',
           'status'             : 'Released',
           'includeDependencies': false,
-          "dryRun"             : false,
           'copy'               : true
         ]
 
