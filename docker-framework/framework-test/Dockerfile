@@ -1,4 +1,4 @@
-FROM docker-dev-local2.demo.jfrogchina.com/docker-framework:latest
+FROM docker-dev-local.art.train/docker-framework:latest
 
 MAINTAINER Mark Galpin markg@jfrog.com
 
