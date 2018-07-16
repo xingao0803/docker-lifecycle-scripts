@@ -1,4 +1,4 @@
-FROM beijing.artifactory.com:5002/docker-framework:latest
+FROM docker-dev-local.art.train/docker-framework:latest
 
 MAINTAINER Mark Galpin markg@jfrog.com
 
